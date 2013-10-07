@@ -118,7 +118,13 @@ case "$domain" in
 *.ee)
 	expiration=$(echo "$out" | awk '/expire:/{split($2, a, "."); printf("%s-%s-%s\n", a[3], a[2], a[1])}')
 	;;
-*.tv)
+*.cz)
+	expiration=$(echo "$out" | awk '/expire:/{split($2, a, "."); printf("%s-%s-%s\n", a[3], a[2], a[1])}')
+	;;
+*.sk)
+	expiration=$(echo "$out" | awk '/Valid-date/{split($2, a, "-"); printf("%s-%s-%s\n", a[1], a[2], a[3])}')
+	;;
+.tv)
 	expiration=$(echo "$out" | awk -F: '/Expiration Date:/{print substr($0, length($1) + 3, 10)}')
 	;;
 *.ca)
